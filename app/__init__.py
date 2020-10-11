@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask , request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt 
@@ -14,6 +14,11 @@ def create_app(config_filename=None):
   
     @app.route("/")
     def hello():
-        return "Hello, World!"
+        number = request.args.get("number")
+        if number == '123':
+            return jsonify({'exists': True})
+        else:
+            return jsonify({'exists': False}) # 3
+      
     
     return app
